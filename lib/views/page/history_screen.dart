@@ -1,5 +1,7 @@
 //import 'package:simple_app/services/pelanggan.services.dart';
 //import 'package:simple_app/utils/global_var.dart';
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:simple_app/model/history.model.dart';
 import 'package:simple_app/services/history.services.dart';
@@ -17,7 +19,7 @@ class _HistoryScreenState extends State<history_screen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: FutureBuilder<List<HistoryData>>(
         future: HistoryService.getListHistoryData(),
         builder: (context, snapshot) {
@@ -44,14 +46,7 @@ class _HistoryScreenState extends State<history_screen> {
       });
 
   Card showOrderData(HistoryData hisData) {
-    String valueDetail = "Tanggal: " +
-        hisData.bulan +
-        " | " +
-        "Jumlah: " +
-        hisData.total_pemasukan +
-        " | " +
-        "Total: " +
-        hisData.total_pemasukan;
+    "Tanggal: ${hisData.bulan} | Jumlah: ${hisData.total_pemasukan} | Total: ${hisData.total_pemasukan}";
     return Card(
       elevation: 2,
       child: ListTile(
@@ -62,22 +57,22 @@ class _HistoryScreenState extends State<history_screen> {
         ),
         subtitle: Column(
           children: <Widget>[
-            Text("Jumlah Order : " + hisData.total_pemasukan),
-            Text("Tanggal : " + hisData.created_at),
+            Text("Jumlah Order : ${hisData.total_pemasukan}"),
+            Text("Tanggal : ${hisData.created_at}"),
           ],
         ),
-        subtitleTextStyle: TextStyle(color: Colors.black, fontSize: 10),
+        subtitleTextStyle: const TextStyle(color: Colors.black, fontSize: 10),
         leading: Container(
           height: 46,
           width: 46,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
           ),
-          child: Icon(
+          alignment: Alignment.center,
+          child: const Icon(
             Icons.backpack_rounded,
             color: Colors.white,
           ),
-          alignment: Alignment.center,
         ),
       ),
     );

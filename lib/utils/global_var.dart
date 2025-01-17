@@ -1,14 +1,16 @@
 import 'dart:io';
 
+import 'package:simple_app/model/karyawan.model.dart';
 import 'package:simple_app/model/kupon.model.dart';
 import 'package:simple_app/model/pelanggan.model.dart';
 import 'package:simple_app/model/transaction_order.model.dart';
 
 class GlobalVar {
   // static String URL_API = "https://retohi.com/cgi-dev/w3b/api/";
-  static String URL_API =
-      "https://baboon-complete-lizard.ngrok-free.app/pta_web/public/api/";
-  static String URL_Image = URL_API + "/uploads/";
+  // ignore: non_constant_identifier_names
+  static String URL_API = "http://10.0.2.2:8000/api/";
+  // ignore: non_constant_identifier_names
+  static String URL_Image = "$URL_API/uploads/";
   static bool succesOrder = false;
   static String orderMessage = "";
 
@@ -17,9 +19,10 @@ class GlobalVar {
   static String tanggalOrder = "";
   static String totalPayment = "0";
 
-  static KuponData? selectedKupon = null;
-  static PelangganData? currentPelanggan = null;
-  static TransactionOrderData? currentOrder = null;
+  static KuponData? selectedKupon;
+  static PelangganData? currentPelanggan;
+  static KaryawanData? currentKaryawan;
+  static TransactionOrderData? currentOrder;
 
-  static File? imageKK = null;
+  static File? imageKK;
 }

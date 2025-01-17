@@ -1,5 +1,9 @@
 //import 'package:simple_app/services/pelanggan.services.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:simple_app/services/karyawan.services.dart';
 import 'package:simple_app/utils/global_func.dart';
+import 'package:simple_app/utils/global_var.dart';
 //import 'package:simple_app/utils/global_var.dart';
 import 'package:simple_app/views/page/home_screen.dart';
 import 'package:simple_app/views/page/register_screen.dart';
@@ -135,19 +139,16 @@ bool checkValidation(BuildContext context) {
 
 void tapLogin(BuildContext context) async {
   if (!checkValidation(context)) return;
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const HomeScreen(),
-    ),
-  );
+  GlobalVar.currentKaryawan = await KaryawanService.checkLoginPelanggan(
+      context, txtEmail.text, txtPassword.text);
 
-  // GlobalVar.currentPelanggan = await PelangganService.checkLoginPelanggan(
-  //     context, txtEmail.text, txtPassword.text);
-
-  // if (GlobalVar.currentPelanggan != null) {
-  //   GlobalFunc.setUserLogined(txtEmail.text);
-  //   _successLogin = true;
-// disinii diisi navigator push
-  // }
+  if (GlobalVar.currentKaryawan != null) {
+    GlobalFunc.setUserLogined(txtEmail.text);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      ),
+    );
+  }
 }

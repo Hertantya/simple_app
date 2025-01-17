@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -13,8 +15,8 @@ class PelangganService {
 
   static Future<PelangganData> getDetailPelanggan(String id_pelanggan) async {
     PelangganData? data = null;
-    Uri url = Uri.parse(
-        GlobalVar.URL_API + "pelanggan/detail.php?id=" + id_pelanggan);
+    Uri url =
+        Uri.parse("${GlobalVar.URL_API}pelanggan/detail.php?id=$id_pelanggan");
     http.Response response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -27,17 +29,24 @@ class PelangganService {
   static Future<PelangganData> checkLoginPelanggan(
       BuildContext context, String email, String password) async {
     var data;
-    Uri url = Uri.parse(GlobalVar.URL_API + "login.php");
+    Uri url = Uri.parse("${GlobalVar.URL_API}karyawan/login");
     // http.Response response = await http.post(url);
     Map mapValue = {'email': email, 'password': password};
     String bodyValue = json.encode(mapValue);
 
-    http.Response response = await http.post(url, body: bodyValue);
+    http.Response response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json', // Set Content-Type to JSON
+      },
+      body: bodyValue,
+    );
 
     if (response.statusCode == 200) {
       // final body = jsonDecode(response.body);
       data = PelangganData.fromJson(jsonDecode(response.body));
     } else {
+      // ignore: use_build_context_synchronously
       GlobalFunc.showError(context, "Username atau passworda anda salah!");
     }
     return data;
@@ -46,7 +55,7 @@ class PelangganService {
   static Future<String> createPelanggan(
       BuildContext context, PelangganData objData, File imageFile) async {
     String data = "";
-    Uri url = Uri.parse(GlobalVar.URL_API + "pelanggan/create.php");
+    Uri url = Uri.parse("${GlobalVar.URL_API}pelanggan/create.php");
     // http.Response response = await http.post(url);
     var mapValue = objData.toJson();
     String bodyValue = json.encode(mapValue);
@@ -61,7 +70,7 @@ class PelangganService {
 
     final body = jsonDecode(data);
     var request = http.MultipartRequest(
-        "POST", Uri.parse(GlobalVar.URL_API + "pelanggan/upload_kk.php"));
+        "POST", Uri.parse("${GlobalVar.URL_API}pelanggan/upload_kk.php"));
     request.fields["id_pelanggan"] = body["data"]["id_pelanggan"];
     var pic =
         await http.MultipartFile.fromPath("file_gambar_kk", imageFile.path);
@@ -79,9 +88,8 @@ class PelangganService {
   static Future<String> updatePelanggan(
       BuildContext context, PelangganData objData) async {
     String data = "";
-    Uri url = Uri.parse(GlobalVar.URL_API +
-        "pelanggan/update.php?id_pelanggan=" +
-        objData.id_pelanggan);
+    Uri url = Uri.parse(
+        "${GlobalVar.URL_API}pelanggan/update.php?id_pelanggan=${objData.id_pelanggan}");
     // http.Response response = await http.post(url);
     var mapValue = objData.toJson();
     String bodyValue = json.encode(mapValue);

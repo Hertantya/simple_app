@@ -1,12 +1,7 @@
-import 'package:simple_app/utils/global_func.dart';
 import 'package:simple_app/views/page/ads_screen.dart';
-import 'package:simple_app/views/page/coupon_order_screen.dart';
 import 'package:simple_app/views/page/history_screen.dart';
 import 'package:simple_app/views/page/login_screen.dart';
-import 'package:simple_app/views/page/profile_screen.dart';
-import 'package:simple_app/views/page/order_list.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:simple_app/views/page/scan_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,13 +12,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    CouponOrderScreen(),
-    OrderListScreen(),
-    ProfileScreen(),
-  ];
-
   Future<void> checkLogin() async {
     // var check = await GlobalFunc.checkLoginUser();
     // var check = false;
@@ -64,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Navigate to the second screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => scan_screen()),
+                  MaterialPageRoute(builder: (context) => const scan_screen()),
                 );
               },
               child: buildImageWithText(
@@ -75,7 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Navigate to the second screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => history_screen()),
+                  MaterialPageRoute(
+                      builder: (context) => const history_screen()),
                 );
               },
               child: buildImageWithText(
@@ -86,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Navigate to the second screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ads_screen()),
+                  MaterialPageRoute(builder: (context) => const ads_screen()),
                 );
               },
               child: buildImageWithText(
@@ -97,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Navigate to the second screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               },
               child: buildImageWithText(
